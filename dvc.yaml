@@ -1,0 +1,224 @@
+stages:
+  DataGeneration_AddDataH5MD:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name DataGeneration_AddDataH5MD
+    deps:
+    - data/traditional_md.h5
+    metrics:
+    - nodes/DataGeneration/AddDataH5MD/node-meta.json:
+        cache: false
+  DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_ConfigurationSelection
+    deps:
+    - nodes/DataGeneration/AddDataH5MD/node-meta.json
+    params:
+    - DataGeneration_ConfigurationSelection
+    outs:
+    - nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - nodes/DataGeneration/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/DataGeneration/ConfigurationSelection/node-meta.json:
+        cache: false
+  DataGeneration_FixEnergy:
+    cmd: zntrack run src.FixEnergy --name DataGeneration_FixEnergy
+    deps:
+    - nodes/DataGeneration/ConfigurationSelection/node-meta.json
+    - nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - nodes/DataGeneration/ConfigurationSelection/selection.png
+    outs:
+    - nodes/DataGeneration/FixEnergy/frames.h5
+    metrics:
+    - nodes/DataGeneration/FixEnergy/node-meta.json:
+        cache: false
+  DataGeneration_OrcaSinglePoint:
+    cmd: zntrack run ipsuite.nodes.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint
+    deps:
+    - nodes/DataGeneration/FixEnergy/frames.h5
+    - nodes/DataGeneration/FixEnergy/node-meta.json
+    params:
+    - DataGeneration_OrcaSinglePoint
+    outs:
+    - nodes/DataGeneration/OrcaSinglePoint/orca
+    - nodes/DataGeneration/OrcaSinglePoint/structures.h5
+    metrics:
+    - nodes/DataGeneration/OrcaSinglePoint/node-meta.json:
+        cache: false
+  DataGeneration_ShuffleAndSelect:
+    cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect
+    deps:
+    - nodes/DataGeneration/FixEnergy/frames.h5
+    - nodes/DataGeneration/FixEnergy/node-meta.json
+    params:
+    - DataGeneration_ShuffleAndSelect
+    outs:
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    metrics:
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json:
+        cache: false
+  PreTraining_Apax:
+    cmd: zntrack run apax.nodes.model.Apax --name PreTraining_Apax
+    deps:
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+    params:
+    - PreTraining_Apax
+    - configs/train.yaml:
+    outs:
+    - nodes/PreTraining/Apax/apax_model
+    - nodes/PreTraining/Apax/train_atoms.extxyz
+    - nodes/PreTraining/Apax/val_atoms.extxyz
+    metrics:
+    - nodes/PreTraining/Apax/metrics.json:
+        cache: false
+    - nodes/PreTraining/Apax/node-meta.json:
+        cache: false
+  PreTraining_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name PreTraining_ApaxBatchPrediction
+    deps:
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/PreTraining/Apax/apax_model
+    - nodes/PreTraining/Apax/metrics.json
+    - nodes/PreTraining/Apax/node-meta.json
+    - nodes/PreTraining/Apax/train_atoms.extxyz
+    - nodes/PreTraining/Apax/val_atoms.extxyz
+    params:
+    - PreTraining_ApaxBatchPrediction
+    outs:
+    - nodes/PreTraining/ApaxBatchPrediction/atoms.h5
+    metrics:
+    - nodes/PreTraining/ApaxBatchPrediction/node-meta.json:
+        cache: false
+  PreTraining_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name PreTraining_PredictionMetrics
+    deps:
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/PreTraining/ApaxBatchPrediction/atoms.h5
+    - nodes/PreTraining/ApaxBatchPrediction/node-meta.json
+    params:
+    - PreTraining_PredictionMetrics
+    outs:
+    - nodes/PreTraining/PredictionMetrics/data.npz
+    - nodes/PreTraining/PredictionMetrics/plots
+    metrics:
+    - nodes/PreTraining/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/PreTraining/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/PreTraining/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/PreTraining/PredictionMetrics/stress.json:
+        cache: false
+    - nodes/PreTraining/PredictionMetrics/stress_deviat.json:
+        cache: false
+    - nodes/PreTraining/PredictionMetrics/stress_hydro.json:
+        cache: false
+  RTL_DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name RTL_DataGeneration_ConfigurationSelection
+    deps:
+    - nodes/DataGeneration/ConfigurationSelection/node-meta.json
+    - nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - nodes/DataGeneration/ConfigurationSelection/selection.png
+    params:
+    - RTL_DataGeneration_ConfigurationSelection
+    outs:
+    - nodes/RTL/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - nodes/RTL/DataGeneration/ConfigurationSelection/selection.png
+    metrics:
+    - nodes/RTL/DataGeneration/ConfigurationSelection/node-meta.json:
+        cache: false
+  RTL_DataGeneration_FixEnergy:
+    cmd: zntrack run src.FixEnergy --name RTL_DataGeneration_FixEnergy
+    deps:
+    - nodes/RTL/DataGeneration/ConfigurationSelection/node-meta.json
+    - nodes/RTL/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - nodes/RTL/DataGeneration/ConfigurationSelection/selection.png
+    outs:
+    - nodes/RTL/DataGeneration/FixEnergy/frames.h5
+    metrics:
+    - nodes/RTL/DataGeneration/FixEnergy/node-meta.json:
+        cache: false
+  RTL_DataGeneration_OrcaSinglePoint:
+    cmd: zntrack run ipsuite.nodes.OrcaSinglePoint --name RTL_DataGeneration_OrcaSinglePoint
+    deps:
+    - nodes/RTL/DataGeneration/FixEnergy/frames.h5
+    - nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+    params:
+    - RTL_DataGeneration_OrcaSinglePoint
+    outs:
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/orca
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/structures.h5
+    metrics:
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/node-meta.json:
+        cache: false
+  RTL_DataGeneration_ShuffleAndSelect:
+    cmd: zntrack run src.ShuffleAndSelect --name RTL_DataGeneration_ShuffleAndSelect
+    deps:
+    - nodes/RTL/DataGeneration/FixEnergy/frames.h5
+    - nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+    params:
+    - RTL_DataGeneration_ShuffleAndSelect
+    outs:
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+    metrics:
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json:
+        cache: false
+  RTL_TransferLearning_Apax:
+    cmd: zntrack run apax.nodes.model.Apax --name RTL_TransferLearning_Apax
+    deps:
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+    params:
+    - RTL_TransferLearning_Apax
+    - configs/transfer.yaml:
+    outs:
+    - nodes/RTL/TransferLearning/Apax/apax_model
+    - nodes/RTL/TransferLearning/Apax/train_atoms.extxyz
+    - nodes/RTL/TransferLearning/Apax/val_atoms.extxyz
+    metrics:
+    - nodes/RTL/TransferLearning/Apax/metrics.json:
+        cache: false
+    - nodes/RTL/TransferLearning/Apax/node-meta.json:
+        cache: false
+  RTL_TransferLearning_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name RTL_TransferLearning_ApaxBatchPrediction
+    deps:
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/RTL/TransferLearning/Apax/apax_model
+    - nodes/RTL/TransferLearning/Apax/metrics.json
+    - nodes/RTL/TransferLearning/Apax/node-meta.json
+    - nodes/RTL/TransferLearning/Apax/train_atoms.extxyz
+    - nodes/RTL/TransferLearning/Apax/val_atoms.extxyz
+    params:
+    - RTL_TransferLearning_ApaxBatchPrediction
+    outs:
+    - nodes/RTL/TransferLearning/ApaxBatchPrediction/atoms.h5
+    metrics:
+    - nodes/RTL/TransferLearning/ApaxBatchPrediction/node-meta.json:
+        cache: false
+  RTL_TransferLearning_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name RTL_TransferLearning_PredictionMetrics
+    deps:
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/RTL/TransferLearning/ApaxBatchPrediction/atoms.h5
+    - nodes/RTL/TransferLearning/ApaxBatchPrediction/node-meta.json
+    params:
+    - RTL_TransferLearning_PredictionMetrics
+    outs:
+    - nodes/RTL/TransferLearning/PredictionMetrics/data.npz
+    - nodes/RTL/TransferLearning/PredictionMetrics/plots
+    metrics:
+    - nodes/RTL/TransferLearning/PredictionMetrics/energy.json:
+        cache: false
+    - nodes/RTL/TransferLearning/PredictionMetrics/forces.json:
+        cache: false
+    - nodes/RTL/TransferLearning/PredictionMetrics/node-meta.json:
+        cache: false
+    - nodes/RTL/TransferLearning/PredictionMetrics/stress.json:
+        cache: false
+    - nodes/RTL/TransferLearning/PredictionMetrics/stress_deviat.json:
+        cache: false
+    - nodes/RTL/TransferLearning/PredictionMetrics/stress_hydro.json:
+        cache: false

@@ -1,0 +1,36 @@
+DataGeneration_ConfigurationSelection:
+    n_configurations: 500
+    seed: 1234
+DataGeneration_OrcaSinglePoint:
+    orcablocks: '%pal nprocs 8 end'
+    orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+DataGeneration_ShuffleAndSelect:
+    n_test: 100
+    n_train: 200
+    n_validate: 200
+    seed: 1234
+PreTraining_Apax:
+    nl_skin: 0.5
+    transformations: null
+PreTraining_ApaxBatchPrediction:
+    batch_size: 10
+PreTraining_PredictionMetrics:
+    figure_ymax: {}
+RTL_DataGeneration_ConfigurationSelection:
+    n_configurations: 150
+    seed: 1234
+RTL_DataGeneration_OrcaSinglePoint:
+    orcablocks: '%pal nprocs 8 end'
+    orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+RTL_DataGeneration_ShuffleAndSelect:
+    n_test: 100
+    n_train: 10
+    n_validate: 10
+    seed: 1234
+RTL_TransferLearning_Apax:
+    nl_skin: 0.5
+    transformations: null
+RTL_TransferLearning_ApaxBatchPrediction:
+    batch_size: 10
+RTL_TransferLearning_PredictionMetrics:
+    figure_ymax: {}

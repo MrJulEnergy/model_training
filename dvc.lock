@@ -1,0 +1,1150 @@
+schema: '2.0'
+stages:
+  DataGeneration_AddDataH5MD:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name DataGeneration_AddDataH5MD
+    deps:
+    - path: data/traditional_md.h5
+      hash: md5
+      md5: ca56d8b4026b3ee375e187fa7ed91382
+      size: 165242562
+    outs:
+    - path: nodes/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: bbe0f9bb4838eb5c2ac2382676b5b890
+      size: 64
+  DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_ConfigurationSelection
+    deps:
+    - path: nodes/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: bbe0f9bb4838eb5c2ac2382676b5b890
+      size: 64
+    params:
+      params.yaml:
+        DataGeneration_ConfigurationSelection:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 8f7df0ea41ea74aa80b4c1d566c51e14
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 021fcf7a2fe223f145cea36e0e10fbda
+      size: 7319
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+  DataGeneration_RecalculateData:
+    cmd: zntrack run src.RecalculateData --name DataGeneration_RecalculateData
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: ac6add61e4938fe989e8583113163878
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: ed8746a2e5339b9134e198d7108514eb
+      size: 73
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: cfde325789466fef0df41f1c7f9689af
+      size: 30652
+    params:
+      params.yaml:
+        DataGeneration_RecalculateData:
+          data_id: 0
+        DataGeneration_RecalculateData+calc:
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/DataGeneration/RecalculateData/node-meta.json
+      hash: md5
+      md5: 9f1574b1c1e0f9da81a996ceec62e2e5
+      size: 64
+  DataGeneration_RecalculateData_1:
+    cmd: zntrack run src.RecalculateData --name DataGeneration_RecalculateData_1
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: ac6add61e4938fe989e8583113163878
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: ed8746a2e5339b9134e198d7108514eb
+      size: 73
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: cfde325789466fef0df41f1c7f9689af
+      size: 30652
+    params:
+      params.yaml:
+        DataGeneration_RecalculateData_1:
+          data_id: 1
+        DataGeneration_RecalculateData_1+calc:
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/DataGeneration/RecalculateData_1/node-meta.json
+      hash: md5
+      md5: 0950a65712f8bfeaf62ccba44ef4d29b
+      size: 64
+  DataGeneration_ConfigurationSelection_1:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name DataGeneration_ConfigurationSelection_1
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 15daa10f0c2166c6d5b5c5115482c226
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 5083c6678b75b69167b99997cd755be7
+      size: 102
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 71200da965035fc768ef9aff6ecf2606
+      size: 30823
+    params:
+      params.yaml:
+        DataGeneration_ConfigurationSelection_1:
+          indices:
+          - 0
+          - 1
+    outs:
+    - path: nodes/DataGeneration/ConfigurationSelection_1/node-meta.json
+      hash: md5
+      md5: ec6f8eefb63431addccf7f24ac1d3141
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection_1/selected_configurations.json
+      hash: md5
+      md5: 1227613ae15e88f17fe0dccdfbdbc59c
+      size: 77
+    - path: nodes/DataGeneration/ConfigurationSelection_1/selection.png
+      hash: md5
+      md5: 27f3c4b20d8d04244cb9deb7a2162500
+      size: 21713
+  DataGeneration_ConfigurationSelection_2:
+    cmd: zntrack run ipsuite.nodes.IndexSelection --name DataGeneration_ConfigurationSelection_2
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 15daa10f0c2166c6d5b5c5115482c226
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 5083c6678b75b69167b99997cd755be7
+      size: 102
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 71200da965035fc768ef9aff6ecf2606
+      size: 30823
+    params:
+      params.yaml:
+        DataGeneration_ConfigurationSelection_2:
+          indices:
+          - 2
+          - 3
+    outs:
+    - path: nodes/DataGeneration/ConfigurationSelection_2/node-meta.json
+      hash: md5
+      md5: df790dea16c40080eb1e2e23867f6bdb
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection_2/selected_configurations.json
+      hash: md5
+      md5: d819ce877df5efd814356a81548e0dd5
+      size: 77
+    - path: nodes/DataGeneration/ConfigurationSelection_2/selection.png
+      hash: md5
+      md5: 087d21ae88bf2b1094b6b4b30ed29ed6
+      size: 21713
+  DataGeneration_OrcaSinglePoint:
+    cmd: zntrack run ipsuite.nodes.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint
+    deps:
+    - path: nodes/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: e43b9b54d4753361d1648a3ba87460c1
+      size: 3936444
+    - path: nodes/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: b8811ae523ad2b9cc4be8b8c6e2690d9
+      size: 64
+    params:
+      params.yaml:
+        DataGeneration_OrcaSinglePoint:
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/DataGeneration/OrcaSinglePoint/node-meta.json
+      hash: md5
+      md5: 5569d35c2dd470c47b4adb9005d89661
+      size: 64
+    - path: nodes/DataGeneration/OrcaSinglePoint/orca
+      hash: md5
+      md5: f75010a7058f9659c4008b92935a0182.dir
+      size: 5389158
+      nfiles: 8
+    - path: nodes/DataGeneration/OrcaSinglePoint/structures.h5
+      hash: md5
+      md5: e69bc4edafa3787c192a4177bff38f6a
+      size: 1468554
+  DataGeneration_ShuffleAndSelect:
+    cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect
+    deps:
+    - path: nodes/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: e43b9b54d4753361d1648a3ba87460c1
+      size: 3936444
+    - path: nodes/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: b8811ae523ad2b9cc4be8b8c6e2690d9
+      size: 64
+    params:
+      params.yaml:
+        DataGeneration_ShuffleAndSelect:
+          n_test: 100
+          n_train: 20
+          n_validate: 20
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: f9c475a212b576299e5deed5685e065f
+      size: 64
+  Training_Apax:
+    cmd: zntrack run apax.nodes.model.Apax --name Training_Apax
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    params:
+      params.yaml:
+        Training_Apax:
+          nl_skin: 0.5
+          transformations:
+      configs/train.yaml:
+        data:
+          batch_size: 6
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 128
+        loss:
+        - name: energy
+          loss_type: crps
+        - name: forces
+          loss_type: crps
+          weight: 2.0
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        model:
+          ensemble:
+            kind: shallow
+            n_members: 8
+          name: gmnn
+          basis:
+            name: bessel
+            n_basis: 7
+            r_max: 5.5
+          n_radial: 5
+          nn:
+          - 64
+          - 64
+          w_init: lecun
+          b_init: zeros
+          use_ntk: false
+          emb_init: uniform
+          calc_stress: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2048
+        optimizer:
+          name: adam
+          schedule:
+            name: cyclic_cosine
+            period: 128
+            decay_factor: 0.85
+          emb_lr: 0.001
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+        seed: 1
+    outs:
+    - path: nodes/Training/Apax/apax_model
+      hash: md5
+      md5: fdb5432b1584e6b526d08c2e01377fdf.dir
+      size: 26854076
+      nfiles: 15
+    - path: nodes/Training/Apax/metrics.json
+      hash: md5
+      md5: 6f4614e23d6254f94fcba64510c1a1bc
+      size: 229
+    - path: nodes/Training/Apax/node-meta.json
+      hash: md5
+      md5: 7967749a687bbb27d330d51540cb4aa2
+      size: 64
+    - path: nodes/Training/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 15319082bc1d4fabb16d44ed963b7245
+      size: 711341
+    - path: nodes/Training/Apax/val_atoms.extxyz
+      hash: md5
+      md5: c72cf0f18372a195e1ee0ef1898cf90c
+      size: 711560
+  Predictions_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name Predictions_ApaxBatchPrediction
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    - path: nodes/Training/Apax/apax_model
+      hash: md5
+      md5: 22ffb396ad7b7e8084fc890d7186f240.dir
+      size: 26790588
+      nfiles: 15
+    - path: nodes/Training/Apax/metrics.json
+      hash: md5
+      md5: 7ad9d33026afc16ac058af25d2eb61c7
+      size: 229
+    - path: nodes/Training/Apax/node-meta.json
+      hash: md5
+      md5: c42d7cec77f109177c7d68133742cd02
+      size: 64
+    - path: nodes/Training/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 15319082bc1d4fabb16d44ed963b7245
+      size: 711341
+    - path: nodes/Training/Apax/val_atoms.extxyz
+      hash: md5
+      md5: c72cf0f18372a195e1ee0ef1898cf90c
+      size: 711560
+    params:
+      params.yaml:
+        Predictions_ApaxBatchPrediction:
+          batch_size: 10
+    outs:
+    - path: nodes/Predictions/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: 2173c7477ec42cb0b8e3efe508824141
+      size: 692034
+    - path: nodes/Predictions/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 440ae547a447153ecf48f5cf2c791325
+      size: 64
+  DataGeneration_FixEnergy:
+    cmd: zntrack run src.FixEnergy --name DataGeneration_FixEnergy
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 8f7df0ea41ea74aa80b4c1d566c51e14
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 021fcf7a2fe223f145cea36e0e10fbda
+      size: 7319
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+    outs:
+    - path: nodes/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: e43b9b54d4753361d1648a3ba87460c1
+      size: 3936444
+    - path: nodes/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: b8811ae523ad2b9cc4be8b8c6e2690d9
+      size: 64
+  Predictions_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name Predictions_PredictionMetrics
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    - path: nodes/Predictions/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: 2173c7477ec42cb0b8e3efe508824141
+      size: 692034
+    - path: nodes/Predictions/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 440ae547a447153ecf48f5cf2c791325
+      size: 64
+    params:
+      params.yaml:
+        Predictions_PredictionMetrics:
+          figure_ymax: {}
+    outs:
+    - path: nodes/Predictions/PredictionMetrics/data.npz
+      hash: md5
+      md5: de216188303dcc2fefee5831ba9c9d41
+      size: 162350
+    - path: nodes/Predictions/PredictionMetrics/energy.json
+      hash: md5
+      md5: cd402a2dfe2e65d5923163362e04737b
+      size: 192
+    - path: nodes/Predictions/PredictionMetrics/forces.json
+      hash: md5
+      md5: 96ee8348b9bcd57b73b0fce57dd50b37
+      size: 192
+    - path: nodes/Predictions/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 5edadf1166c1fddef319dc9fe96e469f
+      size: 64
+    - path: nodes/Predictions/PredictionMetrics/plots
+      hash: md5
+      md5: 0fd0e1ba7ac7497e63c39d8b22fba00d.dir
+      size: 151463
+      nfiles: 2
+    - path: nodes/Predictions/PredictionMetrics/stress.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/Predictions/PredictionMetrics/stress_deviat.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/Predictions/PredictionMetrics/stress_hydro.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+  MD_ApaxJaxMD:
+    cmd: zntrack run apax.nodes.md.ApaxJaxMD --name MD_ApaxJaxMD
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    - path: nodes/Training/Apax/apax_model
+      hash: md5
+      md5: fdb5432b1584e6b526d08c2e01377fdf.dir
+      size: 26854076
+      nfiles: 15
+    - path: nodes/Training/Apax/metrics.json
+      hash: md5
+      md5: 6f4614e23d6254f94fcba64510c1a1bc
+      size: 229
+    - path: nodes/Training/Apax/node-meta.json
+      hash: md5
+      md5: 7967749a687bbb27d330d51540cb4aa2
+      size: 64
+    - path: nodes/Training/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 15319082bc1d4fabb16d44ed963b7245
+      size: 711341
+    - path: nodes/Training/Apax/val_atoms.extxyz
+      hash: md5
+      md5: c72cf0f18372a195e1ee0ef1898cf90c
+      size: 711560
+    params:
+      params.yaml:
+        MD_ApaxJaxMD:
+          data_id: -1
+          repeat:
+      configs/md.yaml:
+        buffer_size: 10000
+        checkpoint_interval: 50000
+        disable_pbar: false
+        dr_threshold: 0.5
+        duration: 15000000
+        ensemble:
+          name: nvt
+          dt: 0.5
+          temperature_schedule:
+            name: constant
+            T0: 300
+          thermostat_chain:
+            chain_length: 3
+            chain_steps: 2
+            sy_steps: 3
+            tau: 100
+        extra_capacity: 0
+        load_momenta: false
+        n_inner: 10000
+        restart: true
+        sampling_rate: 100
+    outs:
+    - path: nodes/MD/ApaxJaxMD/initial_structure.extxyz
+      hash: md5
+      md5: 2ccc0823ecc26f9738e229323b2d1560
+      size: 3558
+    - path: nodes/MD/ApaxJaxMD/md
+      hash: md5
+      md5: 4667ef427c8274ba808eb34d020b887a.dir
+      size: 1595416325
+      nfiles: 5
+    - path: nodes/MD/ApaxJaxMD/node-meta.json
+      hash: md5
+      md5: 89c81d83a6695ec4cf0b63f055cc05f1
+      size: 64
+  Training_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name Training_ApaxBatchPrediction
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    - path: nodes/Training/Apax/apax_model
+      hash: md5
+      md5: fdb5432b1584e6b526d08c2e01377fdf.dir
+      size: 26854076
+      nfiles: 15
+    - path: nodes/Training/Apax/metrics.json
+      hash: md5
+      md5: 6f4614e23d6254f94fcba64510c1a1bc
+      size: 229
+    - path: nodes/Training/Apax/node-meta.json
+      hash: md5
+      md5: 7967749a687bbb27d330d51540cb4aa2
+      size: 64
+    - path: nodes/Training/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 15319082bc1d4fabb16d44ed963b7245
+      size: 711341
+    - path: nodes/Training/Apax/val_atoms.extxyz
+      hash: md5
+      md5: c72cf0f18372a195e1ee0ef1898cf90c
+      size: 711560
+    params:
+      params.yaml:
+        Training_ApaxBatchPrediction:
+          batch_size: 10
+    outs:
+    - path: nodes/Training/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: e2ba1783e576530e1c879554fdfaef80
+      size: 690234
+    - path: nodes/Training/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 499ad23ef0753eb7901f9ea7c07ab28c
+      size: 64
+  Training_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name Training_PredictionMetrics
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: a68fdcaf2774f11604854350286727cd
+      size: 64
+    - path: nodes/Training/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: e2ba1783e576530e1c879554fdfaef80
+      size: 690234
+    - path: nodes/Training/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 499ad23ef0753eb7901f9ea7c07ab28c
+      size: 64
+    params:
+      params.yaml:
+        Training_PredictionMetrics:
+          figure_ymax: {}
+    outs:
+    - path: nodes/Training/PredictionMetrics/data.npz
+      hash: md5
+      md5: 3682555f67f4a1d61a819d72f87143c8
+      size: 162350
+    - path: nodes/Training/PredictionMetrics/energy.json
+      hash: md5
+      md5: 52234dda46b79b0bc3abd730646dbf74
+      size: 190
+    - path: nodes/Training/PredictionMetrics/forces.json
+      hash: md5
+      md5: 5331082d20b50d455e4f9d4ca36351cc
+      size: 190
+    - path: nodes/Training/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 666a777a0df6c747e1a68bea2228c034
+      size: 64
+    - path: nodes/Training/PredictionMetrics/plots
+      hash: md5
+      md5: 32a07a04403d25341a176c50ff2db6da.dir
+      size: 152474
+      nfiles: 2
+    - path: nodes/Training/PredictionMetrics/stress.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/Training/PredictionMetrics/stress_deviat.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/Training/PredictionMetrics/stress_hydro.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+  DataGeneration_LoadTrajectory:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name DataGeneration_LoadTrajectory
+    deps:
+    - path: data/traditional_md.h5
+      hash: md5
+      md5: ca56d8b4026b3ee375e187fa7ed91382
+      size: 165242562
+    outs:
+    - path: nodes/DataGeneration/LoadTrajectory/node-meta.json
+      hash: md5
+      md5: e1c40907643b3d52c925d4ad54b370d9
+      size: 64
+  DataGeneration_RandomSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_RandomSelection
+    deps:
+    - path: nodes/DataGeneration/LoadTrajectory/node-meta.json
+      hash: md5
+      md5: e1c40907643b3d52c925d4ad54b370d9
+      size: 64
+    params:
+      params.yaml:
+        DataGeneration_RandomSelection:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/RandomSelection/node-meta.json
+      hash: md5
+      md5: 14fdc16d201e9f7fb15058fa31eb6d29
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection/selected_configurations.json
+      hash: md5
+      md5: 4216fef948a1c64174d96ab7e8b0868a
+      size: 7322
+    - path: nodes/DataGeneration/RandomSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+  PreTraining_Apax:
+    cmd: zntrack run apax.nodes.model.Apax --name PreTraining_Apax
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: f9c475a212b576299e5deed5685e065f
+      size: 64
+    params:
+      params.yaml:
+        PreTraining_Apax:
+          nl_skin: 0.5
+          transformations:
+      configs/train.yaml:
+        data:
+          batch_size: 6
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 128
+        loss:
+        - name: energy
+          loss_type: crps
+        - name: forces
+          loss_type: crps
+          weight: 2.0
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        model:
+          ensemble:
+            kind: shallow
+            n_members: 8
+          name: gmnn
+          basis:
+            name: bessel
+            n_basis: 7
+            r_max: 5.5
+          n_radial: 5
+          nn:
+          - 64
+          - 64
+          w_init: lecun
+          b_init: zeros
+          use_ntk: false
+          emb_init: uniform
+          calc_stress: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 2048
+        optimizer:
+          name: adam
+          schedule:
+            name: cyclic_cosine
+            period: 128
+            decay_factor: 0.85
+          emb_lr: 0.001
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+        seed: 1
+    outs:
+    - path: nodes/PreTraining/Apax/apax_model
+      hash: md5
+      md5: fe20e246f159355523dd1a612c064998.dir
+      size: 26854205
+      nfiles: 15
+    - path: nodes/PreTraining/Apax/metrics.json
+      hash: md5
+      md5: 460f5e27a990eaeb5556f0016885b339
+      size: 230
+    - path: nodes/PreTraining/Apax/node-meta.json
+      hash: md5
+      md5: ff589b7c3f17465395b5aa1af8fe14f4
+      size: 64
+    - path: nodes/PreTraining/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 726b919771973753fcd01ff19517f0a5
+      size: 71096
+    - path: nodes/PreTraining/Apax/val_atoms.extxyz
+      hash: md5
+      md5: b94fa1039f9d9f857cf5040316cf2af5
+      size: 71156
+  PreTraining_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name PreTraining_ApaxBatchPrediction
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: f9c475a212b576299e5deed5685e065f
+      size: 64
+    - path: nodes/PreTraining/Apax/apax_model
+      hash: md5
+      md5: fe20e246f159355523dd1a612c064998.dir
+      size: 26854205
+      nfiles: 15
+    - path: nodes/PreTraining/Apax/metrics.json
+      hash: md5
+      md5: 460f5e27a990eaeb5556f0016885b339
+      size: 230
+    - path: nodes/PreTraining/Apax/node-meta.json
+      hash: md5
+      md5: ff589b7c3f17465395b5aa1af8fe14f4
+      size: 64
+    - path: nodes/PreTraining/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 726b919771973753fcd01ff19517f0a5
+      size: 71096
+    - path: nodes/PreTraining/Apax/val_atoms.extxyz
+      hash: md5
+      md5: b94fa1039f9d9f857cf5040316cf2af5
+      size: 71156
+    params:
+      params.yaml:
+        PreTraining_ApaxBatchPrediction:
+          batch_size: 10
+    outs:
+    - path: nodes/PreTraining/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: ce84bb630800706181bdd518024f4a8d
+      size: 698588
+    - path: nodes/PreTraining/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 8cc976f78a89b94ec03c722bfaa1ad7b
+      size: 64
+  PreTraining_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name PreTraining_PredictionMetrics
+    deps:
+    - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: cb9420124b476b12a47101c485acc2a2
+      size: 3446469
+    - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: f9c475a212b576299e5deed5685e065f
+      size: 64
+    - path: nodes/PreTraining/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: ce84bb630800706181bdd518024f4a8d
+      size: 698588
+    - path: nodes/PreTraining/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: 8cc976f78a89b94ec03c722bfaa1ad7b
+      size: 64
+    params:
+      params.yaml:
+        PreTraining_PredictionMetrics:
+          figure_ymax: {}
+    outs:
+    - path: nodes/PreTraining/PredictionMetrics/data.npz
+      hash: md5
+      md5: f51d59ff0d57f22a5d2d143377457dd4
+      size: 162350
+    - path: nodes/PreTraining/PredictionMetrics/energy.json
+      hash: md5
+      md5: 25ad6e01729d212676c1c70b1841af91
+      size: 190
+    - path: nodes/PreTraining/PredictionMetrics/forces.json
+      hash: md5
+      md5: 4f6b4550389046a7788bf081687c2199
+      size: 189
+    - path: nodes/PreTraining/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: a67dd72bc241ec8e0de87dc978e069b6
+      size: 64
+    - path: nodes/PreTraining/PredictionMetrics/plots
+      hash: md5
+      md5: ce88b25e497963de5053cf3f52aa8319.dir
+      size: 263604
+      nfiles: 2
+    - path: nodes/PreTraining/PredictionMetrics/stress.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/PreTraining/PredictionMetrics/stress_deviat.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/PreTraining/PredictionMetrics/stress_hydro.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+  RTL_DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name RTL_DataGeneration_ConfigurationSelection
+    deps:
+    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 8f7df0ea41ea74aa80b4c1d566c51e14
+      size: 64
+    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 021fcf7a2fe223f145cea36e0e10fbda
+      size: 7319
+    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+    params:
+      params.yaml:
+        RTL_DataGeneration_ConfigurationSelection:
+          n_configurations: 150
+          seed: 1234
+    outs:
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: bfe71d56fcc25de7a28b9e12059158b6
+      size: 64
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 987e69857383311ff79d32d1d4bcf730
+      size: 2238
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: af145c0f8e3ba11cda34707721d18c9b
+      size: 31699
+  RTL_DataGeneration_FixEnergy:
+    cmd: zntrack run src.FixEnergy --name RTL_DataGeneration_FixEnergy
+    deps:
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: bfe71d56fcc25de7a28b9e12059158b6
+      size: 64
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 987e69857383311ff79d32d1d4bcf730
+      size: 2238
+    - path: nodes/RTL/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: af145c0f8e3ba11cda34707721d18c9b
+      size: 31699
+    outs:
+    - path: nodes/RTL/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: 01d786cccec70a0405cd4d031aef9a66
+      size: 1252124
+    - path: nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: cf74db6a17ab386198d2960f5d8d5036
+      size: 64
+  RTL_DataGeneration_OrcaSinglePoint:
+    cmd: zntrack run ipsuite.nodes.OrcaSinglePoint --name RTL_DataGeneration_OrcaSinglePoint
+    deps:
+    - path: nodes/RTL/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: 01d786cccec70a0405cd4d031aef9a66
+      size: 1252124
+    - path: nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: cf74db6a17ab386198d2960f5d8d5036
+      size: 64
+    params:
+      params.yaml:
+        RTL_DataGeneration_OrcaSinglePoint:
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/RTL/DataGeneration/OrcaSinglePoint/node-meta.json
+      hash: md5
+      md5: 1ca0e02aea19316ab1f5744169d39c60
+      size: 64
+    - path: nodes/RTL/DataGeneration/OrcaSinglePoint/orca
+      hash: md5
+      md5: 54f7f89da4a134cd582cac53b92e9c89.dir
+      size: 5388972
+      nfiles: 8
+    - path: nodes/RTL/DataGeneration/OrcaSinglePoint/structures.h5
+      hash: md5
+      md5: dab6ab050fa97d18e445972a2e163d06
+      size: 494601
+  RTL_DataGeneration_ShuffleAndSelect:
+    cmd: zntrack run src.ShuffleAndSelect --name RTL_DataGeneration_ShuffleAndSelect
+    deps:
+    - path: nodes/RTL/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: 01d786cccec70a0405cd4d031aef9a66
+      size: 1252124
+    - path: nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: cf74db6a17ab386198d2960f5d8d5036
+      size: 64
+    params:
+      params.yaml:
+        RTL_DataGeneration_ShuffleAndSelect:
+          n_test: 100
+          n_train: 5
+          n_validate: 5
+          seed: 1234
+    outs:
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: 8c4b412af485bf710c9796cad009380a
+      size: 1104541
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: 5651ab5ea73c6f4a0a7f690c6faf04f1
+      size: 64
+  RTL_TransferLearning_Apax:
+    cmd: zntrack run apax.nodes.model.Apax --name RTL_TransferLearning_Apax
+    deps:
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: 8c4b412af485bf710c9796cad009380a
+      size: 1104541
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: 5651ab5ea73c6f4a0a7f690c6faf04f1
+      size: 64
+    params:
+      params.yaml:
+        RTL_TransferLearning_Apax:
+          nl_skin: 0.5
+          transformations:
+      configs/transfer.yaml:
+        data:
+          batch_size: 6
+          scale_method: per_element_force_rms_scale
+          shift_method: per_element_regression_shift
+          shift_options:
+            energy_regularisation: 1.0
+          valid_batch_size: 128
+        loss:
+        - name: energy
+          loss_type: crps
+        - name: forces
+          loss_type: crps
+          weight: 2.0
+        metrics:
+        - name: energy
+          reductions:
+          - mae
+        - name: forces
+          reductions:
+          - mae
+        model:
+          ensemble:
+            kind: shallow
+            n_members: 8
+          name: gmnn
+          basis:
+            name: bessel
+            n_basis: 7
+            r_max: 5.5
+          n_radial: 5
+          nn:
+          - 64
+          - 64
+          w_init: lecun
+          b_init: zeros
+          use_ntk: false
+          emb_init: uniform
+          calc_stress: false
+          descriptor_dtype: fp32
+          readout_dtype: fp32
+          scale_shift_dtype: fp32
+        n_epochs: 128
+        optimizer:
+          name: adam
+          schedule:
+            name: cyclic_cosine
+            period: 32
+            decay_factor: 0.85
+          emb_lr: 0.001
+          nn_lr: 0.005
+          scale_lr: 0.001
+          shift_lr: 0.05
+        seed: 1
+    outs:
+    - path: nodes/RTL/TransferLearning/Apax/apax_model
+      hash: md5
+      md5: 0ca1dea59e186f8ab73ca554caaadfe0.dir
+      size: 26736178
+      nfiles: 15
+    - path: nodes/RTL/TransferLearning/Apax/metrics.json
+      hash: md5
+      md5: 828fd72349ef05ddcfa21fd65564956b
+      size: 228
+    - path: nodes/RTL/TransferLearning/Apax/node-meta.json
+      hash: md5
+      md5: 255cb89154cadc0cec5304427aa752ac
+      size: 64
+    - path: nodes/RTL/TransferLearning/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 6453cf51a7473db0f1ce612a5bf0b1d3
+      size: 17769
+    - path: nodes/RTL/TransferLearning/Apax/val_atoms.extxyz
+      hash: md5
+      md5: 1c40b4e90084d200b6f581a46b90243d
+      size: 17788
+  RTL_TransferLearning_ApaxBatchPrediction:
+    cmd: zntrack run apax.nodes.ApaxBatchPrediction --name RTL_TransferLearning_ApaxBatchPrediction
+    deps:
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: 8c4b412af485bf710c9796cad009380a
+      size: 1104541
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: 5651ab5ea73c6f4a0a7f690c6faf04f1
+      size: 64
+    - path: nodes/RTL/TransferLearning/Apax/apax_model
+      hash: md5
+      md5: 0ca1dea59e186f8ab73ca554caaadfe0.dir
+      size: 26736178
+      nfiles: 15
+    - path: nodes/RTL/TransferLearning/Apax/metrics.json
+      hash: md5
+      md5: 828fd72349ef05ddcfa21fd65564956b
+      size: 228
+    - path: nodes/RTL/TransferLearning/Apax/node-meta.json
+      hash: md5
+      md5: 255cb89154cadc0cec5304427aa752ac
+      size: 64
+    - path: nodes/RTL/TransferLearning/Apax/train_atoms.extxyz
+      hash: md5
+      md5: 6453cf51a7473db0f1ce612a5bf0b1d3
+      size: 17769
+    - path: nodes/RTL/TransferLearning/Apax/val_atoms.extxyz
+      hash: md5
+      md5: 1c40b4e90084d200b6f581a46b90243d
+      size: 17788
+    params:
+      params.yaml:
+        RTL_TransferLearning_ApaxBatchPrediction:
+          batch_size: 10
+    outs:
+    - path: nodes/RTL/TransferLearning/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: 7698b0f8e919dcc21ab637485104c990
+      size: 696234
+    - path: nodes/RTL/TransferLearning/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: afe8ab386d640f9fbc0cd334eb954f55
+      size: 64
+  RTL_TransferLearning_PredictionMetrics:
+    cmd: zntrack run ipsuite.nodes.PredictionMetrics --name RTL_TransferLearning_PredictionMetrics
+    deps:
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
+      hash: md5
+      md5: 8c4b412af485bf710c9796cad009380a
+      size: 1104541
+    - path: nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+      hash: md5
+      md5: 5651ab5ea73c6f4a0a7f690c6faf04f1
+      size: 64
+    - path: nodes/RTL/TransferLearning/ApaxBatchPrediction/atoms.h5
+      hash: md5
+      md5: 7698b0f8e919dcc21ab637485104c990
+      size: 696234
+    - path: nodes/RTL/TransferLearning/ApaxBatchPrediction/node-meta.json
+      hash: md5
+      md5: afe8ab386d640f9fbc0cd334eb954f55
+      size: 64
+    params:
+      params.yaml:
+        RTL_TransferLearning_PredictionMetrics:
+          figure_ymax: {}
+    outs:
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/data.npz
+      hash: md5
+      md5: ef4f2e0e0c67a0596a3cf9d5635ac8e4
+      size: 162350
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/energy.json
+      hash: md5
+      md5: ecb67442c34665f787a8aa7ba415286e
+      size: 188
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/forces.json
+      hash: md5
+      md5: c2d381659635f0d3a30d1ddb977b712b
+      size: 189
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/node-meta.json
+      hash: md5
+      md5: 6985048282e6799fcb334795867b0921
+      size: 64
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/plots
+      hash: md5
+      md5: 0d1ce5dc05f8398c1342f977c8fc4c0d.dir
+      size: 213958
+      nfiles: 2
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/stress.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/stress_deviat.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2
+    - path: nodes/RTL/TransferLearning/PredictionMetrics/stress_hydro.json
+      hash: md5
+      md5: 99914b932bd37a50b983c5e7c90ae93b
+      size: 2

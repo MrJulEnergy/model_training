@@ -1,0 +1,23 @@
+ensemble:
+  name: nvt
+  dt: 0.5 # fs time step
+  temperature_schedule:
+    name: constant
+    T0: 300 # K
+  thermostat_chain:
+    chain_length: 3
+    chain_steps: 2
+    sy_steps: 3
+    tau: 100
+
+duration: 15_000_000 # fs
+n_inner: 10_000 # compiled innner steps
+sampling_rate: 100  # dump interval
+buffer_size: 10_000
+dr_threshold: 0.5 # Neighborlist skin
+extra_capacity: 0
+
+load_momenta: false
+restart: true
+checkpoint_interval: 50_000
+disable_pbar: false
