@@ -26,7 +26,7 @@ with project.group("DataGeneration"):
 
     # Divide Dataset into Train, Test and Validate data
     split_data = ShuffleAndSelect(
-        data=fix.frames, n_train=200, n_test=100, n_validate=200
+      data=dft.atoms, n_train=200, n_test=100, n_validate=200
     )
 
 with project.group("PreTraining"):
@@ -54,11 +54,12 @@ with project.group("RTL", "DataGeneration"):
         ASE_ORCA_COMMAND="/data/fzills/tools/orca_5_0_4/orca",
     )
     split_data = ShuffleAndSelect(
-        data=fix.frames, n_train=10, n_test=100, n_validate=10
+      data=dft.atoms, n_train=20, n_test=100, n_validate=20
     )
 
 with project.group("RTL", "TransferLearning"):
     random_transfer = Apax(
+        model = model,
         data=split_data.train_frames,
         validation_data=split_data.validate_frames,
         config="configs/transfer.yaml",

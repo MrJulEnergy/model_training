@@ -45,8 +45,9 @@ stages:
   DataGeneration_ShuffleAndSelect:
     cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect
     deps:
-    - nodes/DataGeneration/FixEnergy/frames.h5
-    - nodes/DataGeneration/FixEnergy/node-meta.json
+    - nodes/DataGeneration/OrcaSinglePoint/node-meta.json
+    - nodes/DataGeneration/OrcaSinglePoint/orca
+    - nodes/DataGeneration/OrcaSinglePoint/structures.h5
     params:
     - DataGeneration_ShuffleAndSelect
     outs:
@@ -154,8 +155,9 @@ stages:
   RTL_DataGeneration_ShuffleAndSelect:
     cmd: zntrack run src.ShuffleAndSelect --name RTL_DataGeneration_ShuffleAndSelect
     deps:
-    - nodes/RTL/DataGeneration/FixEnergy/frames.h5
-    - nodes/RTL/DataGeneration/FixEnergy/node-meta.json
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/node-meta.json
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/orca
+    - nodes/RTL/DataGeneration/OrcaSinglePoint/structures.h5
     params:
     - RTL_DataGeneration_ShuffleAndSelect
     outs:
@@ -166,6 +168,11 @@ stages:
   RTL_TransferLearning_Apax:
     cmd: zntrack run apax.nodes.model.Apax --name RTL_TransferLearning_Apax
     deps:
+    - nodes/PreTraining/Apax/apax_model
+    - nodes/PreTraining/Apax/metrics.json
+    - nodes/PreTraining/Apax/node-meta.json
+    - nodes/PreTraining/Apax/train_atoms.extxyz
+    - nodes/PreTraining/Apax/val_atoms.extxyz
     - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
     - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
     params:

@@ -102,14 +102,14 @@
                 "instance": {
                     "_type": "zntrack.Node",
                     "value": {
-                        "module": "src",
-                        "cls": "FixEnergy",
-                        "name": "DataGeneration_FixEnergy",
+                        "module": "ipsuite.nodes",
+                        "cls": "OrcaSinglePoint",
+                        "name": "DataGeneration_OrcaSinglePoint",
                         "remote": null,
                         "rev": null
                     }
                 },
-                "attribute": "frames",
+                "attribute": "atoms",
                 "item": null
             }
         },
@@ -357,14 +357,14 @@
                 "instance": {
                     "_type": "zntrack.Node",
                     "value": {
-                        "module": "src",
-                        "cls": "FixEnergy",
-                        "name": "RTL_DataGeneration_FixEnergy",
+                        "module": "ipsuite.nodes",
+                        "cls": "OrcaSinglePoint",
+                        "name": "RTL_DataGeneration_OrcaSinglePoint",
                         "remote": null,
                         "rev": null
                     }
                 },
-                "attribute": "frames",
+                "attribute": "atoms",
                 "item": null
             }
         },
@@ -393,7 +393,23 @@
             }
         },
         "log_level": "info",
-        "model": null,
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.model",
+                        "cls": "Apax",
+                        "name": "PreTraining_Apax",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
         "model_directory": {
             "_type": "pathlib.Path",
             "value": "$nwd$/apax_model"
