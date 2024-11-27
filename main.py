@@ -5,6 +5,33 @@ from src import ShuffleAndSelect, FixEnergy
 from apax.nodes import Apax, ApaxBatchPrediction, ApaxJaxMD
 
 project = ips.Project(remove_existing_graph=True, automatic_node_names=True)
+def data_gen(project):
+    with project.group("DataGeneration"):
+        # Load entire MLIP-MD trajectory
+        trajectory = ips.data_loading.AddDataH5MD(file="data/traditional_md.h5")
+
+        # Select Samples to recalculate using DFT
+        dataset = ips.configuration_selection.RandomSelection(
+            data=trajectory, n_configurations=500
+        )
+
+        fix = FixEnergy(data=dataset.atoms)
+
+        # Initiliaze Calculator & Recalculate
+        dft = OrcaSinglePoint(
+            data=fix.frames,
+            orcasimpleinput="PBE def2-TZVP TightSCF EnGrad",
+            orcablocks="%pal nprocs 8 end",
+            ASE_ORCA_COMMAND="/data/fzills/tools/orca_5_0_4/orca",
+        )
+
+        # Divide Dataset into Train, Test and Validate data
+        split_data = ShuffleAndSelect(
+        data=dft.atoms, n_train=200, n_test=100, n_validate=200
+        )
+    return dft, split_data
+
+
 with project.group("DataGeneration"):
     # Load entire MLIP-MD trajectory
     trajectory = ips.data_loading.AddDataH5MD(file="data/traditional_md.h5")
@@ -28,6 +55,9 @@ with project.group("DataGeneration"):
     split_data = ShuffleAndSelect(
       data=dft.atoms, n_train=200, n_test=100, n_validate=200
     )
+
+
+
 
 with project.group("PreTraining"):
     model = Apax(
@@ -53,15 +83,15 @@ with project.group("RTL", "DataGeneration"):
         orcablocks="%pal nprocs 8 end",
         ASE_ORCA_COMMAND="/data/fzills/tools/orca_5_0_4/orca",
     )
-    split_data = ShuffleAndSelect(
-      data=dft.atoms, n_train=20, n_test=100, n_validate=20
+    split_data_trans = ShuffleAndSelect(
+      data=dft.atoms, n_train=30, n_test=90, n_validate=30
     )
 
 with project.group("RTL", "TransferLearning"):
     random_transfer = Apax(
         model = model,
-        data=split_data.train_frames,
-        validation_data=split_data.validate_frames,
+        data=split_data_trans.train_frames,
+        validation_data=split_data_trans.validate_frames,
         config="configs/transfer.yaml",
     )
     prediction = ApaxBatchPrediction(

@@ -190,8 +190,8 @@ stages:
   RTL_TransferLearning_ApaxBatchPrediction:
     cmd: zntrack run apax.nodes.ApaxBatchPrediction --name RTL_TransferLearning_ApaxBatchPrediction
     deps:
-    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
-    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json
     - nodes/RTL/TransferLearning/Apax/apax_model
     - nodes/RTL/TransferLearning/Apax/metrics.json
     - nodes/RTL/TransferLearning/Apax/node-meta.json
@@ -207,8 +207,8 @@ stages:
   RTL_TransferLearning_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name RTL_TransferLearning_PredictionMetrics
     deps:
-    - nodes/RTL/DataGeneration/ShuffleAndSelect/frames.h5
-    - nodes/RTL/DataGeneration/ShuffleAndSelect/node-meta.json
+    - nodes/DataGeneration/ShuffleAndSelect/frames.h5
+    - nodes/DataGeneration/ShuffleAndSelect/node-meta.json
     - nodes/RTL/TransferLearning/ApaxBatchPrediction/atoms.h5
     - nodes/RTL/TransferLearning/ApaxBatchPrediction/node-meta.json
     params:

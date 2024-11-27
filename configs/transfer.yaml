@@ -1,4 +1,4 @@
-n_epochs: 128
+n_epochs: 256
 seed: 1
 
 data:
@@ -52,11 +52,7 @@ model:
 
 optimizer:
   name: adam
-  schedule:
-    name: cyclic_cosine
-    period: 32
-    decay_factor: 0.85
-  emb_lr: 0.001
-  nn_lr: 0.005
+  emb_lr: 0
+  nn_lr: 0.0005
   scale_lr: 0.001
   shift_lr: 0.05

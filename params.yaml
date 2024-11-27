@@ -23,9 +23,9 @@ RTL_DataGeneration_OrcaSinglePoint:
     orcablocks: '%pal nprocs 8 end'
     orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
 RTL_DataGeneration_ShuffleAndSelect:
-    n_test: 100
-    n_train: 20
-    n_validate: 20
+    n_test: 90
+    n_train: 30
+    n_validate: 30
     seed: 1234
 RTL_TransferLearning_Apax:
     nl_skin: 0.5
