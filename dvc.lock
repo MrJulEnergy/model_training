@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   DataGeneration_AddDataH5MD:
-    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name DataGeneration_AddDataH5MD
+    cmd: zntrack run ipsuite.data_loading.add_data_h5md.AddDataH5MD --name DataGeneration_AddDataH5MD
     deps:
     - path: data/traditional_md.h5
       hash: md5
@@ -10,7 +10,7 @@ stages:
     outs:
     - path: nodes/DataGeneration/AddDataH5MD/node-meta.json
       hash: md5
-      md5: bbe0f9bb4838eb5c2ac2382676b5b890
+      md5: f280b5b8cf07ec2da60dbe7a7bbfd1a5
       size: 64
   DataGeneration_ConfigurationSelection:
     cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_ConfigurationSelection
@@ -92,134 +92,117 @@ stages:
       md5: 0950a65712f8bfeaf62ccba44ef4d29b
       size: 64
   DataGeneration_ConfigurationSelection_1:
-    cmd: zntrack run ipsuite.nodes.IndexSelection --name DataGeneration_ConfigurationSelection_1
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_ConfigurationSelection_1
     deps:
     - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
       hash: md5
-      md5: 15daa10f0c2166c6d5b5c5115482c226
+      md5: 8f7df0ea41ea74aa80b4c1d566c51e14
       size: 64
     - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
       hash: md5
-      md5: 5083c6678b75b69167b99997cd755be7
-      size: 102
+      md5: 021fcf7a2fe223f145cea36e0e10fbda
+      size: 7319
     - path: nodes/DataGeneration/ConfigurationSelection/selection.png
       hash: md5
-      md5: 71200da965035fc768ef9aff6ecf2606
-      size: 30823
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
     params:
       params.yaml:
         DataGeneration_ConfigurationSelection_1:
-          indices:
-          - 0
-          - 1
+          n_configurations: 500
+          seed: 1234
     outs:
     - path: nodes/DataGeneration/ConfigurationSelection_1/node-meta.json
       hash: md5
-      md5: ec6f8eefb63431addccf7f24ac1d3141
+      md5: ef3ebe3e8671b3fd28f570d247a862d9
       size: 64
     - path: nodes/DataGeneration/ConfigurationSelection_1/selected_configurations.json
       hash: md5
-      md5: 1227613ae15e88f17fe0dccdfbdbc59c
-      size: 77
+      md5: a20fbb80805e67053bd04bbcf2f8db89
+      size: 7335
     - path: nodes/DataGeneration/ConfigurationSelection_1/selection.png
       hash: md5
-      md5: 27f3c4b20d8d04244cb9deb7a2162500
-      size: 21713
+      md5: 0a03bf9b1a0da0f6502a7064fee02005
+      size: 33422
   DataGeneration_ConfigurationSelection_2:
-    cmd: zntrack run ipsuite.nodes.IndexSelection --name DataGeneration_ConfigurationSelection_2
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_ConfigurationSelection_2
     deps:
-    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+    - path: nodes/DataGeneration/AddDataH5MD_1/node-meta.json
       hash: md5
-      md5: 15daa10f0c2166c6d5b5c5115482c226
+      md5: 424b68fc61a6c39588980bf5dc53ad8c
       size: 64
-    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
-      hash: md5
-      md5: 5083c6678b75b69167b99997cd755be7
-      size: 102
-    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
-      hash: md5
-      md5: 71200da965035fc768ef9aff6ecf2606
-      size: 30823
     params:
       params.yaml:
         DataGeneration_ConfigurationSelection_2:
-          indices:
-          - 2
-          - 3
+          n_configurations: 500
+          seed: 1234
     outs:
     - path: nodes/DataGeneration/ConfigurationSelection_2/node-meta.json
       hash: md5
-      md5: df790dea16c40080eb1e2e23867f6bdb
+      md5: 4a210330413e42e91f6888f8873e11ba
       size: 64
     - path: nodes/DataGeneration/ConfigurationSelection_2/selected_configurations.json
       hash: md5
-      md5: d819ce877df5efd814356a81548e0dd5
-      size: 77
+      md5: a2e1a55c924e557b1be65e6ddcdd68be
+      size: 6490
     - path: nodes/DataGeneration/ConfigurationSelection_2/selection.png
       hash: md5
-      md5: 087d21ae88bf2b1094b6b4b30ed29ed6
-      size: 21713
+      md5: 99f5d765399c82f63d32061d36c8fb12
+      size: 50455
   DataGeneration_OrcaSinglePoint:
-    cmd: zntrack run ipsuite.nodes.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint
+    cmd: zntrack run ipsuite.calculators.orca.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint
     deps:
     - path: nodes/DataGeneration/FixEnergy/frames.h5
       hash: md5
-      md5: e43b9b54d4753361d1648a3ba87460c1
-      size: 3936444
-    - path: nodes/DataGeneration/FixEnergy/node-meta.json
-      hash: md5
-      md5: b8811ae523ad2b9cc4be8b8c6e2690d9
-      size: 64
+      md5: a087b94c5e01cee9d62e61359b51b5e6
+      size: 64263597
     params:
       params.yaml:
         DataGeneration_OrcaSinglePoint:
+          orca_shell: /data/fzills/tools/orca_5_0_4/orca
           orcablocks: '%pal nprocs 8 end'
           orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
     outs:
     - path: nodes/DataGeneration/OrcaSinglePoint/node-meta.json
       hash: md5
-      md5: 5569d35c2dd470c47b4adb9005d89661
+      md5: 11aa2e60db199f6e9a97b2158753f2c5
       size: 64
     - path: nodes/DataGeneration/OrcaSinglePoint/orca
       hash: md5
-      md5: f75010a7058f9659c4008b92935a0182.dir
-      size: 5389158
+      md5: f9d69eb734a7439b316800ee9aac8017.dir
+      size: 5389157
       nfiles: 8
     - path: nodes/DataGeneration/OrcaSinglePoint/structures.h5
       hash: md5
-      md5: e69bc4edafa3787c192a4177bff38f6a
-      size: 1468554
+      md5: a055c0533c80783cb3b62375c7618912
+      size: 64244242
   DataGeneration_ShuffleAndSelect:
     cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect
     deps:
-    - path: nodes/DataGeneration/OrcaSinglePoint/node-meta.json
-      hash: md5
-      md5: 5569d35c2dd470c47b4adb9005d89661
-      size: 64
     - path: nodes/DataGeneration/OrcaSinglePoint/orca
       hash: md5
-      md5: f75010a7058f9659c4008b92935a0182.dir
-      size: 5389158
+      md5: f9d69eb734a7439b316800ee9aac8017.dir
+      size: 5389157
       nfiles: 8
     - path: nodes/DataGeneration/OrcaSinglePoint/structures.h5
       hash: md5
-      md5: e69bc4edafa3787c192a4177bff38f6a
-      size: 1468554
+      md5: a055c0533c80783cb3b62375c7618912
+      size: 64244242
     params:
       params.yaml:
         DataGeneration_ShuffleAndSelect:
-          n_test: 100
-          n_train: 200
-          n_validate: 200
+          n_test: 400
+          n_train: 20
+          n_validate: 20
           seed: 1234
     outs:
     - path: nodes/DataGeneration/ShuffleAndSelect/frames.h5
       hash: md5
-      md5: ae9a04413581cf0a6670bf632afbe4b7
-      size: 1138037
+      md5: b6dc4f687acc32e1bf3c94350921c617
+      size: 3155280
     - path: nodes/DataGeneration/ShuffleAndSelect/node-meta.json
       hash: md5
-      md5: 4d64b432a411fd9989b529a93f7807b7
+      md5: 8a50ae7c31178ff8f58965d5ea05bdc5
       size: 64
   Training_Apax:
     cmd: zntrack run apax.nodes.model.Apax --name Training_Apax
@@ -361,26 +344,26 @@ stages:
   DataGeneration_FixEnergy:
     cmd: zntrack run src.FixEnergy --name DataGeneration_FixEnergy
     deps:
-    - path: nodes/DataGeneration/ConfigurationSelection/node-meta.json
+    - path: nodes/DataGeneration/RandomSelection/node-meta.json
       hash: md5
-      md5: 8f7df0ea41ea74aa80b4c1d566c51e14
+      md5: ecc531579acaa9b702346e49f26172aa
       size: 64
-    - path: nodes/DataGeneration/ConfigurationSelection/selected_configurations.json
+    - path: nodes/DataGeneration/RandomSelection/selected_ids.json
       hash: md5
-      md5: 021fcf7a2fe223f145cea36e0e10fbda
-      size: 7319
-    - path: nodes/DataGeneration/ConfigurationSelection/selection.png
+      md5: 0fb00a9be9b856b78b6d1d2057d1a5f4
+      size: 3275
+    - path: nodes/DataGeneration/RandomSelection/selection.png
       hash: md5
       md5: 202ec31ead221085d79381beffeb90e3
       size: 33462
     outs:
     - path: nodes/DataGeneration/FixEnergy/frames.h5
       hash: md5
-      md5: e43b9b54d4753361d1648a3ba87460c1
-      size: 3936444
+      md5: a087b94c5e01cee9d62e61359b51b5e6
+      size: 64263597
     - path: nodes/DataGeneration/FixEnergy/node-meta.json
       hash: md5
-      md5: b8811ae523ad2b9cc4be8b8c6e2690d9
+      md5: db12e3eed934cbcbe20e91b504a4a067
       size: 64
   Predictions_PredictionMetrics:
     cmd: zntrack run ipsuite.nodes.PredictionMetrics --name Predictions_PredictionMetrics
@@ -627,11 +610,12 @@ stages:
       md5: e1c40907643b3d52c925d4ad54b370d9
       size: 64
   DataGeneration_RandomSelection:
-    cmd: zntrack run ipsuite.nodes.RandomSelection --name DataGeneration_RandomSelection
+    cmd: zntrack run ipsuite.configuration_selection.random.RandomSelection --name
+      DataGeneration_RandomSelection
     deps:
-    - path: nodes/DataGeneration/LoadTrajectory/node-meta.json
+    - path: nodes/DataGeneration/AddDataH5MD/node-meta.json
       hash: md5
-      md5: e1c40907643b3d52c925d4ad54b370d9
+      md5: f280b5b8cf07ec2da60dbe7a7bbfd1a5
       size: 64
     params:
       params.yaml:
@@ -641,12 +625,12 @@ stages:
     outs:
     - path: nodes/DataGeneration/RandomSelection/node-meta.json
       hash: md5
-      md5: 14fdc16d201e9f7fb15058fa31eb6d29
+      md5: ecc531579acaa9b702346e49f26172aa
       size: 64
-    - path: nodes/DataGeneration/RandomSelection/selected_configurations.json
+    - path: nodes/DataGeneration/RandomSelection/selected_ids.json
       hash: md5
-      md5: 4216fef948a1c64174d96ab7e8b0868a
-      size: 7322
+      md5: 0fb00a9be9b856b78b6d1d2057d1a5f4
+      size: 3275
     - path: nodes/DataGeneration/RandomSelection/selection.png
       hash: md5
       md5: 202ec31ead221085d79381beffeb90e3
@@ -1179,3 +1163,334 @@ stages:
       hash: md5
       md5: 99914b932bd37a50b983c5e7c90ae93b
       size: 2
+  Pretrain_DataGeneration_AddDataH5MD:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name Pretrain_DataGeneration_AddDataH5MD
+    deps:
+    - path: data/traditional_md.h5
+      hash: md5
+      md5: ca56d8b4026b3ee375e187fa7ed91382
+      size: 165242562
+    outs:
+    - path: nodes/Pretrain/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: e525017ac61c7b560a8eb5b0e82d1f77
+      size: 64
+  Pretrain_DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name Pretrain_DataGeneration_ConfigurationSelection
+    deps:
+    - path: nodes/Pretrain/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: e525017ac61c7b560a8eb5b0e82d1f77
+      size: 64
+    params:
+      params.yaml:
+        Pretrain_DataGeneration_ConfigurationSelection:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/Pretrain/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 67c41608cfd33f33f35b322971c63861
+      size: 64
+    - path: 
+        nodes/Pretrain/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: f5e75d4380a8787ae0acfd801f335f61
+      size: 7328
+    - path: nodes/Pretrain/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+  PreTraining_DataGeneration_AddDataH5MD:
+    cmd: zntrack run ipsuite.nodes.AddDataH5MD --name PreTraining_DataGeneration_AddDataH5MD
+    deps:
+    - path: data/traditional_md.h5
+      hash: md5
+      md5: ca56d8b4026b3ee375e187fa7ed91382
+      size: 165242562
+    outs:
+    - path: nodes/PreTraining/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: 99f617b7d425cd71f02654688f47507a
+      size: 64
+  PreTraining_DataGeneration_ConfigurationSelection:
+    cmd: zntrack run ipsuite.nodes.RandomSelection --name PreTraining_DataGeneration_ConfigurationSelection
+    deps:
+    - path: nodes/PreTraining/DataGeneration/AddDataH5MD/node-meta.json
+      hash: md5
+      md5: 99f617b7d425cd71f02654688f47507a
+      size: 64
+    params:
+      params.yaml:
+        PreTraining_DataGeneration_ConfigurationSelection:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/PreTraining/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b8a6538b24598d6393567fb0f177111
+      size: 64
+    - path: 
+        nodes/PreTraining/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 8b706250ef86facfafd2d5047a0642f1
+      size: 7331
+    - path: nodes/PreTraining/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+  PreTraining_DataGeneration_FixEnergy:
+    cmd: zntrack run src.FixEnergy --name PreTraining_DataGeneration_FixEnergy
+    deps:
+    - path: nodes/PreTraining/DataGeneration/ConfigurationSelection/node-meta.json
+      hash: md5
+      md5: 1b8a6538b24598d6393567fb0f177111
+      size: 64
+    - path: 
+        nodes/PreTraining/DataGeneration/ConfigurationSelection/selected_configurations.json
+      hash: md5
+      md5: 8b706250ef86facfafd2d5047a0642f1
+      size: 7331
+    - path: nodes/PreTraining/DataGeneration/ConfigurationSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+    outs:
+    - path: nodes/PreTraining/DataGeneration/FixEnergy/frames.h5
+      hash: md5
+      md5: e43b9b54d4753361d1648a3ba87460c1
+      size: 3936444
+    - path: nodes/PreTraining/DataGeneration/FixEnergy/node-meta.json
+      hash: md5
+      md5: d7042826be9d78490086a62ee95e05c7
+      size: 64
+  DataGeneration_AddDataH5MD_1:
+    cmd: zntrack run ipsuite.data_loading.add_data_h5md.AddDataH5MD --name DataGeneration_AddDataH5MD_1
+    deps:
+    - path: data/enhanced_md.h5
+      hash: md5
+      md5: 5701e08aba6fe4e249409ebdfdaa3e31
+      size: 6836675
+    outs:
+    - path: nodes/DataGeneration/AddDataH5MD_1/node-meta.json
+      hash: md5
+      md5: 7dc5a4463b3289aad05161cf9bc352ee
+      size: 64
+  DataGeneration_FixEnergy_1:
+    cmd: zntrack run src.FixEnergy --name DataGeneration_FixEnergy_1
+    deps:
+    - path: nodes/DataGeneration/RandomSelection_1/node-meta.json
+      hash: md5
+      md5: 5246a79927429123d4e7bf4b30d68e7f
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection_1/selected_ids.json
+      hash: md5
+      md5: bf7e6a7da6054ec94d28dd96f5ec72de
+      size: 3280
+    - path: nodes/DataGeneration/RandomSelection_1/selection.png
+      hash: md5
+      md5: 0a03bf9b1a0da0f6502a7064fee02005
+      size: 33422
+    outs:
+    - path: nodes/DataGeneration/FixEnergy_1/frames.h5
+      hash: md5
+      md5: 476b2ef3fefc1547dc315464f1ecda1d
+      size: 64339868
+    - path: nodes/DataGeneration/FixEnergy_1/node-meta.json
+      hash: md5
+      md5: f550fe8152311f4bb016035fa7af5fae
+      size: 64
+  DataGeneration_FixEnergy_2:
+    cmd: zntrack run src.FixEnergy --name DataGeneration_FixEnergy_2
+    deps:
+    - path: nodes/DataGeneration/RandomSelection_2/node-meta.json
+      hash: md5
+      md5: b153d7332b6a9e3fb2bbd5c55a60026d
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection_2/selected_ids.json
+      hash: md5
+      md5: f8e17f8f9546b85baa08747c1072dedf
+      size: 2444
+    - path: nodes/DataGeneration/RandomSelection_2/selection.png
+      hash: md5
+      md5: 99f5d765399c82f63d32061d36c8fb12
+      size: 50455
+    outs:
+    - path: nodes/DataGeneration/FixEnergy_2/frames.h5
+      hash: md5
+      md5: a45f6a53138b6b612a1ea12df97b1acc
+      size: 64753382
+    - path: nodes/DataGeneration/FixEnergy_2/node-meta.json
+      hash: md5
+      md5: 1ad71f15825f55e6d266042a794ae318
+      size: 64
+  DataGeneration_OrcaSinglePoint_1:
+    cmd: zntrack run ipsuite.calculators.orca.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint_1
+    deps:
+    - path: nodes/DataGeneration/FixEnergy_1/frames.h5
+      hash: md5
+      md5: 476b2ef3fefc1547dc315464f1ecda1d
+      size: 64339868
+    params:
+      params.yaml:
+        DataGeneration_OrcaSinglePoint_1:
+          orca_shell: /data/fzills/tools/orca_5_0_4/orca
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/DataGeneration/OrcaSinglePoint_1/node-meta.json
+      hash: md5
+      md5: ab8e14fab285269de1612a06b749264c
+      size: 64
+    - path: nodes/DataGeneration/OrcaSinglePoint_1/orca
+      hash: md5
+      md5: c2b7b5b79b91bf2c7ab7ed8ef38351b2.dir
+      size: 5389129
+      nfiles: 8
+    - path: nodes/DataGeneration/OrcaSinglePoint_1/structures.h5
+      hash: md5
+      md5: ff49d3d699c69a9753fa00187f7d0d77
+      size: 64330351
+  DataGeneration_OrcaSinglePoint_2:
+    cmd: zntrack run ipsuite.calculators.orca.OrcaSinglePoint --name DataGeneration_OrcaSinglePoint_2
+    deps:
+    - path: nodes/DataGeneration/FixEnergy_2/frames.h5
+      hash: md5
+      md5: a45f6a53138b6b612a1ea12df97b1acc
+      size: 64753382
+    params:
+      params.yaml:
+        DataGeneration_OrcaSinglePoint_2:
+          orca_shell: /data/fzills/tools/orca_5_0_4/orca
+          orcablocks: '%pal nprocs 8 end'
+          orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+    outs:
+    - path: nodes/DataGeneration/OrcaSinglePoint_2/node-meta.json
+      hash: md5
+      md5: bfbe695c533cd6325e50393bb9fb92bd
+      size: 64
+    - path: nodes/DataGeneration/OrcaSinglePoint_2/orca
+      hash: md5
+      md5: c816e4798a8bd5a93019ecd56a1b7ca4.dir
+      size: 5389299
+      nfiles: 8
+    - path: nodes/DataGeneration/OrcaSinglePoint_2/structures.h5
+      hash: md5
+      md5: e889fe28514e45ffc57280c8947831ed
+      size: 64769200
+  DataGeneration_ShuffleAndSelect_1:
+    cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect_1
+    deps:
+    - path: nodes/DataGeneration/OrcaSinglePoint_1/orca
+      hash: md5
+      md5: c2b7b5b79b91bf2c7ab7ed8ef38351b2.dir
+      size: 5389129
+      nfiles: 8
+    - path: nodes/DataGeneration/OrcaSinglePoint_1/structures.h5
+      hash: md5
+      md5: ff49d3d699c69a9753fa00187f7d0d77
+      size: 64330351
+    params:
+      params.yaml:
+        DataGeneration_ShuffleAndSelect_1:
+          n_test: 400
+          n_train: 20
+          n_validate: 20
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/ShuffleAndSelect_1/frames.h5
+      hash: md5
+      md5: 03de0648703853873188d49337d266ca
+      size: 3157682
+    - path: nodes/DataGeneration/ShuffleAndSelect_1/node-meta.json
+      hash: md5
+      md5: 34fe4bfa043413c04430a666bca18f9a
+      size: 64
+  DataGeneration_RandomSelection_1:
+    cmd: zntrack run ipsuite.configuration_selection.random.RandomSelection --name
+      DataGeneration_RandomSelection_1
+    deps:
+    - path: nodes/DataGeneration/RandomSelection/node-meta.json
+      hash: md5
+      md5: ecc531579acaa9b702346e49f26172aa
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection/selected_ids.json
+      hash: md5
+      md5: 0fb00a9be9b856b78b6d1d2057d1a5f4
+      size: 3275
+    - path: nodes/DataGeneration/RandomSelection/selection.png
+      hash: md5
+      md5: 202ec31ead221085d79381beffeb90e3
+      size: 33462
+    params:
+      params.yaml:
+        DataGeneration_RandomSelection_1:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/RandomSelection_1/node-meta.json
+      hash: md5
+      md5: 5246a79927429123d4e7bf4b30d68e7f
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection_1/selected_ids.json
+      hash: md5
+      md5: bf7e6a7da6054ec94d28dd96f5ec72de
+      size: 3280
+    - path: nodes/DataGeneration/RandomSelection_1/selection.png
+      hash: md5
+      md5: 0a03bf9b1a0da0f6502a7064fee02005
+      size: 33422
+  DataGeneration_RandomSelection_2:
+    cmd: zntrack run ipsuite.configuration_selection.random.RandomSelection --name
+      DataGeneration_RandomSelection_2
+    deps:
+    - path: nodes/DataGeneration/AddDataH5MD_1/node-meta.json
+      hash: md5
+      md5: 7dc5a4463b3289aad05161cf9bc352ee
+      size: 64
+    params:
+      params.yaml:
+        DataGeneration_RandomSelection_2:
+          n_configurations: 500
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/RandomSelection_2/node-meta.json
+      hash: md5
+      md5: b153d7332b6a9e3fb2bbd5c55a60026d
+      size: 64
+    - path: nodes/DataGeneration/RandomSelection_2/selected_ids.json
+      hash: md5
+      md5: f8e17f8f9546b85baa08747c1072dedf
+      size: 2444
+    - path: nodes/DataGeneration/RandomSelection_2/selection.png
+      hash: md5
+      md5: 99f5d765399c82f63d32061d36c8fb12
+      size: 50455
+  DataGeneration_ShuffleAndSelect_2:
+    cmd: zntrack run src.ShuffleAndSelect --name DataGeneration_ShuffleAndSelect_2
+    deps:
+    - path: nodes/DataGeneration/OrcaSinglePoint_2/orca
+      hash: md5
+      md5: c816e4798a8bd5a93019ecd56a1b7ca4.dir
+      size: 5389299
+      nfiles: 8
+    - path: nodes/DataGeneration/OrcaSinglePoint_2/structures.h5
+      hash: md5
+      md5: e889fe28514e45ffc57280c8947831ed
+      size: 64769200
+    params:
+      params.yaml:
+        DataGeneration_ShuffleAndSelect_2:
+          n_test: 400
+          n_train: 20
+          n_validate: 20
+          seed: 1234
+    outs:
+    - path: nodes/DataGeneration/ShuffleAndSelect_2/frames.h5
+      hash: md5
+      md5: f50b5ba6bbea03bda14f35128c8784e7
+      size: 3184572
+    - path: nodes/DataGeneration/ShuffleAndSelect_2/node-meta.json
+      hash: md5
+      md5: b97ae529c89333325b8ad93bfcfbbe03
+      size: 64

@@ -15,18 +15,19 @@ import typing
 
 class ShuffleAndSelect(zntrack.Node):
     data: list[ase.Atoms] = zntrack.deps()
-    frames: list[ase.Atoms] = fields.Atoms()
-
     n_train: int = zntrack.params()
     n_test: int = zntrack.params()
     n_validate: int = zntrack.params()
     seed: int = zntrack.params(1234)
+
+    frames: list[ase.Atoms] = fields.Atoms()
 
     def run(self):
         random.seed(self.seed)
         random.shuffle(self.data)
         self.frames = self.data
 
+    
     @functools.cached_property
     def train_frames(self):
         return self.frames[0 : self.n_train]

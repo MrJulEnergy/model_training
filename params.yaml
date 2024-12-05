@@ -1,36 +1,60 @@
-DataGeneration_ConfigurationSelection:
-    n_configurations: 500
-    seed: 1234
 DataGeneration_OrcaSinglePoint:
-    orcablocks: '%pal nprocs 8 end'
-    orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+  orca_shell: /data/fzills/tools/orca_5_0_4/orca
+  orcablocks: '%pal nprocs 8 end'
+  orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+DataGeneration_OrcaSinglePoint_1:
+  orca_shell: /data/fzills/tools/orca_5_0_4/orca
+  orcablocks: '%pal nprocs 8 end'
+  orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+DataGeneration_OrcaSinglePoint_2:
+  orca_shell: /data/fzills/tools/orca_5_0_4/orca
+  orcablocks: '%pal nprocs 8 end'
+  orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
+DataGeneration_RandomSelection:
+  n_configurations: 500
+  seed: 1234
+DataGeneration_RandomSelection_1:
+  n_configurations: 500
+  seed: 1234
+DataGeneration_RandomSelection_2:
+  n_configurations: 500
+  seed: 1234
 DataGeneration_ShuffleAndSelect:
-    n_test: 100
-    n_train: 200
-    n_validate: 200
-    seed: 1234
-PreTraining_Apax:
-    nl_skin: 0.5
-    transformations: null
-PreTraining_ApaxBatchPrediction:
-    batch_size: 10
-PreTraining_PredictionMetrics:
-    figure_ymax: {}
-RTL_DataGeneration_ConfigurationSelection:
-    n_configurations: 150
-    seed: 1234
-RTL_DataGeneration_OrcaSinglePoint:
-    orcablocks: '%pal nprocs 8 end'
-    orcasimpleinput: PBE def2-TZVP TightSCF EnGrad
-RTL_DataGeneration_ShuffleAndSelect:
-    n_test: 90
-    n_train: 30
-    n_validate: 30
-    seed: 1234
-RTL_TransferLearning_Apax:
-    nl_skin: 0.5
-    transformations: null
-RTL_TransferLearning_ApaxBatchPrediction:
-    batch_size: 10
-RTL_TransferLearning_PredictionMetrics:
-    figure_ymax: {}
+  n_test: 400
+  n_train: 20
+  n_validate: 20
+  seed: 1234
+DataGeneration_ShuffleAndSelect_1:
+  n_test: 400
+  n_train: 20
+  n_validate: 20
+  seed: 1234
+DataGeneration_ShuffleAndSelect_2:
+  n_test: 400
+  n_train: 20
+  n_validate: 20
+  seed: 1234
+ModelMetrics_ApaxBatchPrediction:
+  batch_size: 10
+ModelMetrics_ApaxBatchPrediction_1:
+  batch_size: 10
+ModelMetrics_ApaxBatchPrediction_2:
+  batch_size: 10
+ModelMetrics_PredictionMetrics:
+  figure_ymax: {}
+ModelMetrics_PredictionMetrics_1:
+  figure_ymax: {}
+ModelMetrics_PredictionMetrics_2:
+  figure_ymax: {}
+ModelTraining_Apax:
+  log_level: info
+  nl_skin: 0.5
+  transformations: null
+ModelTraining_Apax_1:
+  log_level: info
+  nl_skin: 0.5
+  transformations: null
+ModelTraining_Apax_2:
+  log_level: info
+  nl_skin: 0.5
+  transformations: null

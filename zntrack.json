@@ -1,70 +1,185 @@
 {
     "DataGeneration_AddDataH5MD": {
-        "file": "data/traditional_md.h5",
         "nwd": {
             "_type": "pathlib.Path",
             "value": "nodes/DataGeneration/AddDataH5MD"
-        }
+        },
+        "file": "data/traditional_md.h5"
     },
-    "DataGeneration_ConfigurationSelection": {
-        "data": {
-            "DataGeneration_AddDataH5MD": {
-                "_type": "znflow.Connection",
-                "value": {
-                    "instance": {
-                        "_type": "zntrack.Node",
-                        "value": {
-                            "module": "ipsuite.nodes",
-                            "cls": "AddDataH5MD",
-                            "name": "DataGeneration_AddDataH5MD",
-                            "remote": null,
-                            "rev": null
-                        }
-                    },
-                    "attribute": "atoms",
-                    "item": null
-                }
-            }
-        },
-        "exclude": null,
-        "exclude_configurations": null,
-        "img_selection": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/selection.png"
-        },
+    "DataGeneration_AddDataH5MD_1": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/DataGeneration/ConfigurationSelection"
-        }
+            "value": "nodes/DataGeneration/AddDataH5MD_1"
+        },
+        "file": "data/enhanced_md.h5"
     },
-    "DataGeneration_FixEnergy": {
+    "DataGeneration_RandomSelection": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/RandomSelection"
+        },
         "data": {
             "_type": "znflow.Connection",
             "value": {
                 "instance": {
                     "_type": "zntrack.Node",
                     "value": {
-                        "module": "ipsuite.nodes",
-                        "cls": "RandomSelection",
-                        "name": "DataGeneration_ConfigurationSelection",
+                        "module": "ipsuite.data_loading.add_data_h5md",
+                        "name": "DataGeneration_AddDataH5MD",
+                        "cls": "AddDataH5MD",
                         "remote": null,
                         "rev": null
                     }
                 },
-                "attribute": "atoms",
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        }
+    },
+    "DataGeneration_RandomSelection_1": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/RandomSelection_1"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.configuration_selection.random",
+                        "name": "DataGeneration_RandomSelection",
+                        "cls": "RandomSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "excluded_frames",
+                "item": null
+            }
+        },
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        }
+    },
+    "DataGeneration_RandomSelection_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/RandomSelection_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.data_loading.add_data_h5md",
+                        "name": "DataGeneration_AddDataH5MD_1",
+                        "cls": "AddDataH5MD",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "img_selection": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/selection.png"
+        }
+    },
+    "DataGeneration_FixEnergy": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/FixEnergy"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.configuration_selection.random",
+                        "name": "DataGeneration_RandomSelection",
+                        "cls": "RandomSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
                 "item": null
             }
         },
         "frames_path": {
             "_type": "pathlib.Path",
             "value": "$nwd$/frames.h5"
-        },
+        }
+    },
+    "DataGeneration_FixEnergy_1": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/DataGeneration/FixEnergy"
+            "value": "nodes/DataGeneration/FixEnergy_1"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.configuration_selection.random",
+                        "name": "DataGeneration_RandomSelection_1",
+                        "cls": "RandomSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "frames_path": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/frames.h5"
+        }
+    },
+    "DataGeneration_FixEnergy_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/FixEnergy_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.configuration_selection.random",
+                        "name": "DataGeneration_RandomSelection_2",
+                        "cls": "RandomSelection",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "frames_path": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/frames.h5"
         }
     },
     "DataGeneration_OrcaSinglePoint": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/OrcaSinglePoint"
+        },
         "data": {
             "_type": "znflow.Connection",
             "value": {
@@ -72,8 +187,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
-                        "cls": "FixEnergy",
                         "name": "DataGeneration_FixEnergy",
+                        "cls": "FixEnergy",
                         "remote": null,
                         "rev": null
                     }
@@ -89,37 +204,13 @@
         "output_file": {
             "_type": "pathlib.Path",
             "value": "$nwd$/structures.h5"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/DataGeneration/OrcaSinglePoint"
         }
     },
-    "DataGeneration_ShuffleAndSelect": {
-        "data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "ipsuite.nodes",
-                        "cls": "OrcaSinglePoint",
-                        "name": "DataGeneration_OrcaSinglePoint",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "atoms",
-                "item": null
-            }
-        },
+    "DataGeneration_OrcaSinglePoint_1": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/DataGeneration/ShuffleAndSelect"
-        }
-    },
-    "PreTraining_Apax": {
-        "config": "configs/train.yaml",
+            "value": "nodes/DataGeneration/OrcaSinglePoint_1"
+        },
         "data": {
             "_type": "znflow.Connection",
             "value": {
@@ -127,8 +218,139 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
-                        "cls": "ShuffleAndSelect",
+                        "name": "DataGeneration_FixEnergy_1",
+                        "cls": "FixEnergy",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "orca_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/orca"
+        },
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/structures.h5"
+        }
+    },
+    "DataGeneration_OrcaSinglePoint_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/OrcaSinglePoint_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_FixEnergy_2",
+                        "cls": "FixEnergy",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "orca_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/orca"
+        },
+        "output_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/structures.h5"
+        }
+    },
+    "DataGeneration_ShuffleAndSelect": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/ShuffleAndSelect"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.calculators.orca",
+                        "name": "DataGeneration_OrcaSinglePoint",
+                        "cls": "OrcaSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        }
+    },
+    "DataGeneration_ShuffleAndSelect_1": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/ShuffleAndSelect_1"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.calculators.orca",
+                        "name": "DataGeneration_OrcaSinglePoint_1",
+                        "cls": "OrcaSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        }
+    },
+    "DataGeneration_ShuffleAndSelect_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/DataGeneration/ShuffleAndSelect_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "ipsuite.calculators.orca",
+                        "name": "DataGeneration_OrcaSinglePoint_2",
+                        "cls": "OrcaSinglePoint",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        }
+    },
+    "ModelTraining_Apax": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelTraining/Apax"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
                         "name": "DataGeneration_ShuffleAndSelect",
+                        "cls": "ShuffleAndSelect",
                         "remote": null,
                         "rev": null
                     }
@@ -137,7 +359,24 @@
                 "item": null
             }
         },
-        "log_level": "info",
+        "config": "configs/base_train.yaml",
+        "validation_data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "validate_frames",
+                "item": null
+            }
+        },
         "model": null,
         "model_directory": {
             "_type": "pathlib.Path",
@@ -147,33 +386,16 @@
             "_type": "pathlib.Path",
             "value": "$nwd$/train_atoms.extxyz"
         },
-        "validation_data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "src",
-                        "cls": "ShuffleAndSelect",
-                        "name": "DataGeneration_ShuffleAndSelect",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "validate_frames",
-                "item": null
-            }
-        },
         "validation_data_file": {
             "_type": "pathlib.Path",
             "value": "$nwd$/val_atoms.extxyz"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/PreTraining/Apax"
         }
     },
-    "PreTraining_ApaxBatchPrediction": {
+    "ModelTraining_Apax_1": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelTraining/Apax_1"
+        },
         "data": {
             "_type": "znflow.Connection",
             "value": {
@@ -181,209 +403,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_1",
                         "cls": "ShuffleAndSelect",
-                        "name": "DataGeneration_ShuffleAndSelect",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "test_frames",
-                "item": null
-            }
-        },
-        "model": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "apax.nodes.model",
-                        "cls": "Apax",
-                        "name": "PreTraining_Apax",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": null,
-                "item": null
-            }
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/PreTraining/ApaxBatchPrediction"
-        }
-    },
-    "PreTraining_PredictionMetrics": {
-        "data_file": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/data.npz"
-        },
-        "plots_dir": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/plots"
-        },
-        "x": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "src",
-                        "cls": "ShuffleAndSelect",
-                        "name": "DataGeneration_ShuffleAndSelect",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "test_frames",
-                "item": null
-            }
-        },
-        "y": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "apax.nodes",
-                        "cls": "ApaxBatchPrediction",
-                        "name": "PreTraining_ApaxBatchPrediction",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "atoms",
-                "item": null
-            }
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/PreTraining/PredictionMetrics"
-        }
-    },
-    "RTL_DataGeneration_ConfigurationSelection": {
-        "data": {
-            "DataGeneration_ConfigurationSelection": {
-                "_type": "znflow.Connection",
-                "value": {
-                    "instance": {
-                        "_type": "zntrack.Node",
-                        "value": {
-                            "module": "ipsuite.nodes",
-                            "cls": "RandomSelection",
-                            "name": "DataGeneration_ConfigurationSelection",
-                            "remote": null,
-                            "rev": null
-                        }
-                    },
-                    "attribute": "excluded_atoms",
-                    "item": null
-                }
-            }
-        },
-        "exclude": null,
-        "exclude_configurations": null,
-        "img_selection": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/selection.png"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/RTL/DataGeneration/ConfigurationSelection"
-        }
-    },
-    "RTL_DataGeneration_FixEnergy": {
-        "data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "ipsuite.nodes",
-                        "cls": "RandomSelection",
-                        "name": "RTL_DataGeneration_ConfigurationSelection",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "atoms",
-                "item": null
-            }
-        },
-        "frames_path": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/frames.h5"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/RTL/DataGeneration/FixEnergy"
-        }
-    },
-    "RTL_DataGeneration_OrcaSinglePoint": {
-        "data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "src",
-                        "cls": "FixEnergy",
-                        "name": "RTL_DataGeneration_FixEnergy",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "frames",
-                "item": null
-            }
-        },
-        "orca_directory": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/orca"
-        },
-        "output_file": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/structures.h5"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/RTL/DataGeneration/OrcaSinglePoint"
-        }
-    },
-    "RTL_DataGeneration_ShuffleAndSelect": {
-        "data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "ipsuite.nodes",
-                        "cls": "OrcaSinglePoint",
-                        "name": "RTL_DataGeneration_OrcaSinglePoint",
-                        "remote": null,
-                        "rev": null
-                    }
-                },
-                "attribute": "atoms",
-                "item": null
-            }
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/RTL/DataGeneration/ShuffleAndSelect"
-        }
-    },
-    "RTL_TransferLearning_Apax": {
-        "config": "configs/transfer.yaml",
-        "data": {
-            "_type": "znflow.Connection",
-            "value": {
-                "instance": {
-                    "_type": "zntrack.Node",
-                    "value": {
-                        "module": "src",
-                        "cls": "ShuffleAndSelect",
-                        "name": "RTL_DataGeneration_ShuffleAndSelect",
                         "remote": null,
                         "rev": null
                     }
@@ -392,7 +413,24 @@
                 "item": null
             }
         },
-        "log_level": "info",
+        "config": "configs/random_transfer.yaml",
+        "validation_data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_1",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "validate_frames",
+                "item": null
+            }
+        },
         "model": {
             "_type": "znflow.Connection",
             "value": {
@@ -400,8 +438,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "apax.nodes.model",
+                        "name": "ModelTraining_Apax",
                         "cls": "Apax",
-                        "name": "PreTraining_Apax",
                         "remote": null,
                         "rev": null
                     }
@@ -418,6 +456,34 @@
             "_type": "pathlib.Path",
             "value": "$nwd$/train_atoms.extxyz"
         },
+        "validation_data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/val_atoms.extxyz"
+        }
+    },
+    "ModelTraining_Apax_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelTraining/Apax_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "train_frames",
+                "item": null
+            }
+        },
+        "config": "configs/es_transfer.yaml",
         "validation_data": {
             "_type": "znflow.Connection",
             "value": {
@@ -425,8 +491,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
                         "cls": "ShuffleAndSelect",
-                        "name": "RTL_DataGeneration_ShuffleAndSelect",
                         "remote": null,
                         "rev": null
                     }
@@ -435,16 +501,41 @@
                 "item": null
             }
         },
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.model",
+                        "name": "ModelTraining_Apax",
+                        "cls": "Apax",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "model_directory": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/apax_model"
+        },
+        "train_data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/train_atoms.extxyz"
+        },
         "validation_data_file": {
             "_type": "pathlib.Path",
             "value": "$nwd$/val_atoms.extxyz"
-        },
-        "nwd": {
-            "_type": "pathlib.Path",
-            "value": "nodes/RTL/TransferLearning/Apax"
         }
     },
-    "RTL_TransferLearning_ApaxBatchPrediction": {
+    "ModelMetrics_ApaxBatchPrediction": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelMetrics/ApaxBatchPrediction"
+        },
         "data": {
             "_type": "znflow.Connection",
             "value": {
@@ -452,8 +543,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
                         "cls": "ShuffleAndSelect",
-                        "name": "DataGeneration_ShuffleAndSelect",
                         "remote": null,
                         "rev": null
                     }
@@ -469,8 +560,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "apax.nodes.model",
+                        "name": "ModelTraining_Apax",
                         "cls": "Apax",
-                        "name": "RTL_TransferLearning_Apax",
                         "remote": null,
                         "rev": null
                     }
@@ -479,19 +570,15 @@
                 "item": null
             }
         },
-        "nwd": {
+        "frames_path": {
             "_type": "pathlib.Path",
-            "value": "nodes/RTL/TransferLearning/ApaxBatchPrediction"
+            "value": "$nwd$/frames.h5"
         }
     },
-    "RTL_TransferLearning_PredictionMetrics": {
-        "data_file": {
+    "ModelMetrics_PredictionMetrics": {
+        "nwd": {
             "_type": "pathlib.Path",
-            "value": "$nwd$/data.npz"
-        },
-        "plots_dir": {
-            "_type": "pathlib.Path",
-            "value": "$nwd$/plots"
+            "value": "nodes/ModelMetrics/PredictionMetrics"
         },
         "x": {
             "_type": "znflow.Connection",
@@ -500,8 +587,8 @@
                     "_type": "zntrack.Node",
                     "value": {
                         "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
                         "cls": "ShuffleAndSelect",
-                        "name": "DataGeneration_ShuffleAndSelect",
                         "remote": null,
                         "rev": null
                     }
@@ -516,20 +603,208 @@
                 "instance": {
                     "_type": "zntrack.Node",
                     "value": {
-                        "module": "apax.nodes",
+                        "module": "apax.nodes.analysis",
+                        "name": "ModelMetrics_ApaxBatchPrediction",
                         "cls": "ApaxBatchPrediction",
-                        "name": "RTL_TransferLearning_ApaxBatchPrediction",
                         "remote": null,
                         "rev": null
                     }
                 },
-                "attribute": "atoms",
+                "attribute": "frames",
                 "item": null
             }
         },
+        "data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/data.npz"
+        },
+        "plots_dir": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/plots"
+        }
+    },
+    "ModelMetrics_ApaxBatchPrediction_1": {
         "nwd": {
             "_type": "pathlib.Path",
-            "value": "nodes/RTL/TransferLearning/PredictionMetrics"
+            "value": "nodes/ModelMetrics/ApaxBatchPrediction_1"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "test_frames",
+                "item": null
+            }
+        },
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.model",
+                        "name": "ModelTraining_Apax_1",
+                        "cls": "Apax",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "frames_path": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/frames.h5"
+        }
+    },
+    "ModelMetrics_PredictionMetrics_1": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelMetrics/PredictionMetrics_1"
+        },
+        "x": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "test_frames",
+                "item": null
+            }
+        },
+        "y": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.analysis",
+                        "name": "ModelMetrics_ApaxBatchPrediction_1",
+                        "cls": "ApaxBatchPrediction",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/data.npz"
+        },
+        "plots_dir": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/plots"
+        }
+    },
+    "ModelMetrics_ApaxBatchPrediction_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelMetrics/ApaxBatchPrediction_2"
+        },
+        "data": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "test_frames",
+                "item": null
+            }
+        },
+        "model": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.model",
+                        "name": "ModelTraining_Apax_2",
+                        "cls": "Apax",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": null,
+                "item": null
+            }
+        },
+        "frames_path": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/frames.h5"
+        }
+    },
+    "ModelMetrics_PredictionMetrics_2": {
+        "nwd": {
+            "_type": "pathlib.Path",
+            "value": "nodes/ModelMetrics/PredictionMetrics_2"
+        },
+        "x": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "src",
+                        "name": "DataGeneration_ShuffleAndSelect_2",
+                        "cls": "ShuffleAndSelect",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "test_frames",
+                "item": null
+            }
+        },
+        "y": {
+            "_type": "znflow.Connection",
+            "value": {
+                "instance": {
+                    "_type": "zntrack.Node",
+                    "value": {
+                        "module": "apax.nodes.analysis",
+                        "name": "ModelMetrics_ApaxBatchPrediction_2",
+                        "cls": "ApaxBatchPrediction",
+                        "remote": null,
+                        "rev": null
+                    }
+                },
+                "attribute": "frames",
+                "item": null
+            }
+        },
+        "data_file": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/data.npz"
+        },
+        "plots_dir": {
+            "_type": "pathlib.Path",
+            "value": "$nwd$/plots"
         }
     }
 }
